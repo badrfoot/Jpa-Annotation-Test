@@ -26,8 +26,8 @@ import org.badr.orm.jpa.model.BaseClass;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @ToString
-@IdClass(EmployeeId.class)
 @EqualsAndHashCode
+@IdClass(EmployeeId.class)
 public class Employee{
 
 	@Id

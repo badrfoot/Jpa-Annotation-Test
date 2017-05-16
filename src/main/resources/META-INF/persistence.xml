@@ -25,11 +25,11 @@
     </persistence-unit>
 
     <persistence-unit name="JPA_Annotation" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-
-<!--        <class>com.holydis.badr.test.jpa.hibernate.model.Cart_Item</class>-->
-<!--        <exclude-unlisted-classes>true</exclude-unlisted-classes>-->
-
+        <!-- use this for Hibernate < 5.2 -->
+<!--        <provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+        <!-- use this for Hibernate > 5.2 -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>

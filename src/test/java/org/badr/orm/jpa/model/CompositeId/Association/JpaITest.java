@@ -14,12 +14,16 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.Ignore;
 import static org.junit.Assert.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author OBD
  */
 public class JpaITest extends BaseClassITest {
+
+	Logger LOGGER = LoggerFactory.getLogger(JpaITest.class);
 
 	public JpaITest() {
 	}
@@ -48,7 +52,7 @@ public class JpaITest extends BaseClassITest {
 	 * <a href=https://hibernate.atlassian.net/browse/HHH-10623>https://hibernate.atlassian.net/browse/HHH-10623</a>
 	 */
 	@Test //@Ignore
-	public void ShouldPersistEntitiesForCompositeKeyWithAssociation() {
+	public void ShouldPersistEntitiesForCompositeKeyWithAssociation_NotOk() {
 
 		Department department1 = new Department("IT", "Seatle");
 		Employee employee1 = new Employee("Bill", department1, "Gate");
@@ -59,17 +63,73 @@ public class JpaITest extends BaseClassITest {
 		entityManager.persist(department1);				
 		transaction.commit();
 
-		// If we comment below line ==> the test pass
+		// If we comment below line ==> the test pass whithout
 		entityManager.detach(department1);
 		
+		LOGGER.debug( "Outside Transaction - Before Persist IsNull(department1) = {} - IsNull(employee1.getDepartment()) = {}",
+					(department1 == null), (employee1.getDepartment() == null));
+		LOGGER.debug( "Outside Transaction - employee1.toString() = {}", employee1.toString());
+
 		transaction.begin();
+		LOGGER.debug( "Inside  Transaction - Before Persist employee1.toString() = {}", employee1.toString());
+		LOGGER.debug( "Inside Transaction - Before Persist IsNull(department1) = {} - IsNull(employee1.getDepartment()) = {}",
+					(department1 == null), (employee1.getDepartment() == null));
+		LOGGER.debug( "Insisde Transaction - Before Persist employee1.toString() = {}", employee1.toString());		
 		entityManager.persist(employee1);
+		LOGGER.debug( "Inside Transaction - After Persist IsNull(department1) = {} - IsNull(employee1.getDepartment()) = {}",
+					(department1 == null), (employee1.getDepartment() == null));
+		LOGGER.debug( "Insisde Transaction - After Persist employee1.toString() = {}", employee1.toString());
+		
 		transaction.commit();
 		
 		transaction.begin();
 		Employee employee2 = entityManager.find(Employee.class, new EmployeeId("Bill", department1.getId()));
 		transaction.commit();
 		
+		assertEquals(employee1, employee2);
+	 }
+
+
+	/**
+	 * Method should pass but we have errors see hibernate Bug for Hibernate 5.0_
+	 * <a href=https://hibernate.atlassian.net/browse/HHH-10623>https://hibernate.atlassian.net/browse/HHH-10623</a>
+	 */
+	@Test //@Ignore
+	public void ShouldPersistEntitiesForCompositeKeyWithAssociation_OK() {
+
+		Department department1 = new Department("IT", "Seatle");
+		Employee employee1 = new Employee("Bill", department1, "Gate");
+
+		EntityTransaction transaction = entityManager.getTransaction();
+
+		transaction.begin();
+		entityManager.persist(department1);
+		transaction.commit();
+
+		// If we comment below line ==> the test pass whithout
+		entityManager.detach(department1);
+
+		LOGGER.debug( "Outside Transaction - Before Persist IsNull(department1) = {} - IsNull(employee1.getDepartment()) = {}",
+					(department1 == null), (employee1.getDepartment() == null));
+		LOGGER.debug( "Outside Transaction - employee1.toString() = {}", employee1.toString());
+
+		transaction.begin();
+		LOGGER.debug( "Inside  Transaction - Before Persist employee1.toString() = {}", employee1.toString());
+		LOGGER.debug( "Inside Transaction - Before Persist IsNull(department1) = {} - IsNull(employee1.getDepartment()) = {}",
+					(department1 == null), (employee1.getDepartment() == null));
+		LOGGER.debug( "Insisde Transaction - Before Persist employee1.toString() = {}", employee1.toString());
+		employee1.setDepartment(entityManager.find(Department.class, department1.getId()));
+		entityManager.persist(employee1);
+		LOGGER.debug( "Inside Transaction - After Persist IsNull(department1) = {} - IsNull(employee1.getDepartment()) = {}",
+					(department1 == null), (employee1.getDepartment() == null));
+		LOGGER.debug( "Insisde Transaction - After Persist employee1.toString() = {}", employee1.toString());
+
+		transaction.commit();
+
+		transaction.begin();
+		Employee employee2 = entityManager.find(Employee.class, new EmployeeId("Bill", department1.getId()));
+		transaction.commit();
+
 		assertEquals(employee1, employee2);
 	 }
 }
