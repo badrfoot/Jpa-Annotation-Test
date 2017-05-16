@@ -24,32 +24,12 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="Hsql_Persistence_SecondaryClass" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="JPA_Annotation" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.holydis.badr.test.jpa.hibernate.model.Cart_Item</class>
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
-        <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
-            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
-            <property name="javax.persistence.jdbc.user" value="sa"/>
-            <property name="javax.persistence.jdbc.password" value=""/>
-            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-            <property name="connection.pool_size" value="1"/>
-            <property name="hibernate.hbm2ddl.auto" value="create"/>
-            <property name="hibernate.show_sql" value="true"/>
-            <property name="hibernate.show_type" value="true"/>
-            <property name="hibernate.format_sql" value="true"/>
-            <property name="hibernate.use_sql_comments" value="true"/>
-        </properties>
-    </persistence-unit>
 
-    <persistence-unit name="Hsql_Persistence_MappedSupperClass" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.holydis.badr.test.jpa.hibernate.model.Person</class>
-        <class>com.holydis.badr.test.jpa.hibernate.model.Student</class>
-        <class>com.holydis.badr.test.jpa.hibernate.model.Instructor</class>
-        <class>com.holydis.badr.test.jpa.hibernate.model.YoungStudent</class>
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+<!--        <class>com.holydis.badr.test.jpa.hibernate.model.Cart_Item</class>-->
+<!--        <exclude-unlisted-classes>true</exclude-unlisted-classes>-->
+
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
