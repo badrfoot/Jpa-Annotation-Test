@@ -5,23 +5,22 @@
  */
 package org.badr.orm.jpa.model.CompositeId.Association;
 
-import javax.persistence.Entity;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.badr.orm.jpa.model.BaseClass;
 
 /**
  *
  * @author OBD
  */
-@Entity
-
 @NoArgsConstructor @AllArgsConstructor
-public class Department extends BaseClass{
-	
-	private String name;
-	private String Location;
+@EqualsAndHashCode
+@Getter
+public class EmployeeId implements Serializable{
+
+	private String firstName;
+	private Long department;
 
 }
