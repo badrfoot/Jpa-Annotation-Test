@@ -16,11 +16,27 @@ import lombok.NoArgsConstructor;
  * @author OBD
  */
 @NoArgsConstructor @AllArgsConstructor
-@EqualsAndHashCode
 @Getter
 public class EmployeeId implements Serializable{
 
 	private String firstName;
 	private Long department;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)  return false;
+		if (!(obj instanceof EmployeeId ))  return false;
+
+		if (department == null)  return false;
+
+		EmployeeId otherEmployeeId = (EmployeeId) obj;
+		return department.equals(otherEmployeeId.getDepartment());
+	}
+
+	@Override
+	public int hashCode() {
+		return department == null ? super.hashCode():department.hashCode();
+	}
+
 
 }
