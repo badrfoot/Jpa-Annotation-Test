@@ -5,7 +5,13 @@
  */
 package org.badr.orm.jpa.model.CompositeId.Association;
 
+import java.util.Collections;
+import java.util.stream.Collectors;
 import javax.persistence.EntityTransaction;
+import javax.persistence.metamodel.Attribute;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
+import javax.persistence.metamodel.SingularAttribute;
 import org.badr.orm.jpa.BaseClassITest;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -90,7 +96,7 @@ public class CompositePKManyToOneITest extends BaseClassITest {
 	 }
 
 	
-	@Test //@Ignore
+	@Test
 	public void ShouldPersistEntitiesForCompositeKeyWithAssociation_OK() {
 
 		Department department1 = new Department("IT", "Seatle");
@@ -137,4 +143,20 @@ public class CompositePKManyToOneITest extends BaseClassITest {
 
 		assertEquals(employee1, employee2);
 	 }
+
+	@Test
+	public void shouldGetClassNameOfManyToOnePrimaryKey(){
+
+		Metamodel metamodel = entityManager.getMetamodel();
+		EntityType<Employee> entityType = metamodel.entity(Employee.class);
+
+		String expectedClassName = "org.badr.orm.jpa.model.CompositeId.Association.Department";
+		String className = entityType.getIdClassAttributes().stream().filter(id -> (id.getPersistentAttributeType()==Attribute.PersistentAttributeType.MANY_TO_ONE))
+																	 .map(id-> id.getType().getJavaType().getName())
+																	 .collect(Collectors.joining(","));
+		LOGGER.debug("Class name of ManyToOne ID used for [Employee] == {}", className);
+
+		assertEquals(expectedClassName, className);		
+	}
+	
 }
