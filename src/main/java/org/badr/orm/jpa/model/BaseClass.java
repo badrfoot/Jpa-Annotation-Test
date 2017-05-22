@@ -5,6 +5,7 @@
  */
 package org.badr.orm.jpa.model;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ public abstract class BaseClass {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "YesIamID")
 	private Long id;
 
 	public Long getId() {

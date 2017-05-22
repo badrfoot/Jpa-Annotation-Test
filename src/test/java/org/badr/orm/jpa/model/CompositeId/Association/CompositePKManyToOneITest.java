@@ -29,8 +29,6 @@ import org.slf4j.LoggerFactory;
  */
 public class CompositePKManyToOneITest extends BaseClassITest {
 
-	Logger LOGGER = LoggerFactory.getLogger(CompositePKManyToOneITest.class);
-
 	public CompositePKManyToOneITest() {
 	}
 
@@ -96,7 +94,7 @@ public class CompositePKManyToOneITest extends BaseClassITest {
 	 }
 
 	
-	@Test
+	@Test @Ignore
 	public void ShouldPersistEntitiesForCompositeKeyWithAssociation_OK() {
 
 		Department department1 = new Department("IT", "Seatle");
@@ -144,7 +142,7 @@ public class CompositePKManyToOneITest extends BaseClassITest {
 		assertEquals(employee1, employee2);
 	 }
 
-	@Test
+	@Test @Ignore
 	public void shouldGetClassNameOfManyToOnePrimaryKey(){
 
 		Metamodel metamodel = entityManager.getMetamodel();
@@ -156,7 +154,29 @@ public class CompositePKManyToOneITest extends BaseClassITest {
 																	 .collect(Collectors.joining(","));
 		LOGGER.debug("Class name of ManyToOne ID used for [Employee] == {}", className);
 
-		assertEquals(expectedClassName, className);		
+		assertEquals(expectedClassName, className);
+	}
+
+
+	@Test
+	public void shouldGetCompositeIdentity(){
+
+		Department department1 = new Department("IT", "Seattle");
+		Employee employee1 = new Employee("Bill", department1, "Gate");
+
+		EntityTransaction transaction = entityManager.getTransaction();
+
+//		transaction.begin();
+		entityManager.persist(department1);
+		entityManager.persist(employee1);
+		//transaction.commit();
+
+		//entityManager.detach(employee1);
+
+		//transaction.begin();
+		//entityManager.find(Employee.class, new EmployeeId(employee1.getFirstName(), department1.getId()));
+		entityManager.getEntityManagerFactory().getPersistenceUnitUtil().getIdentifier(employee1);
+//		transaction.commit();
 	}
 	
 }

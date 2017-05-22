@@ -7,12 +7,15 @@ package org.badr.orm.jpa;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author OBD
  */
 public abstract class BaseClassITest {
+	protected Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	protected EntityManager entityManager;
 

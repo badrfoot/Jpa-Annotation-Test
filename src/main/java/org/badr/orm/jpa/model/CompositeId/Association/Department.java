@@ -6,8 +6,11 @@
 package org.badr.orm.jpa.model.CompositeId.Association;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.badr.orm.jpa.model.BaseClass;
 
 /**
@@ -15,6 +18,8 @@ import org.badr.orm.jpa.model.BaseClass;
  * @author OBD
  */
 @Entity
+@Table(name="DEPARTEEEEMENT")
+@Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 public class Department extends BaseClass{
 	
