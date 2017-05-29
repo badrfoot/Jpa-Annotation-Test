@@ -5,22 +5,19 @@
  */
 package org.badr.orm.jpa.model;
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import org.badr.orm.jpa.model.CompositeId.Association.Employee;
-
 /**
  *
  * @author OBD
  */
+
+
 @MappedSuperclass
-public abstract class BaseClass{
+public abstract class SuperBaseClass {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +27,4 @@ public abstract class BaseClass{
 	public Long getId() {
 		return id;
 	}
-
-	@OneToMany(mappedBy = "department")
-	private Set<Employee> empployees = new HashSet<>();
 }

@@ -5,7 +5,10 @@
  */
 package org.badr.orm.jpa.model.CompositeId.Association;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,13 +20,15 @@ import org.badr.orm.jpa.model.BaseClass;
  *
  * @author OBD
  */
-@Entity
-@Table(name="DEPARTEEEEMENT")
+@Entity(name =  "DePET199999")
+//@Table(name="DEPARTEEEEMENT")
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 public class Department extends BaseClass{
 	
 	private String name;
 	private String Location;
+
+	
 
 }
