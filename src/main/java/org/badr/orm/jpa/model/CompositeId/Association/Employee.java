@@ -31,19 +31,16 @@ import org.badr.orm.jpa.model.BaseClass;
 @NoArgsConstructor @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@IdClass(EmployeeId.class)
+//@IdClass(EmployeeId.class)
 public class Employee{
 
 	@Id
 	private String firstName;
 
-	@Id
+	//@Id
 	@ManyToOne
 	@JoinColumn(name = "Id_Department")
 	private Department department;
 
-
-	@OneToMany
-	List<EmployeeWithEmebeddedId> transientList = new ArrayList<>();
 	private String lastName;
 }

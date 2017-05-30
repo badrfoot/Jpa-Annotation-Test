@@ -29,6 +29,4 @@ public class Department extends BaseClass{
 	private String name;
 	private String Location;
 
-	
-
 }

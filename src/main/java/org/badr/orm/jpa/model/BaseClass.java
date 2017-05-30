@@ -31,6 +31,6 @@ public abstract class BaseClass{
 		return id;
 	}
 
-	@OneToMany(mappedBy = "department")
-	private Set<Employee> empployees = new HashSet<>();
+	private final String JustFinalField = "ttttttttFinal" ;
+
 }
