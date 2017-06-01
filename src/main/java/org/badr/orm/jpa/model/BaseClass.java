@@ -5,15 +5,10 @@
  */
 package org.badr.orm.jpa.model;
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
-import org.badr.orm.jpa.model.CompositeId.Association.Employee;
 
 /**
  *
@@ -23,14 +18,11 @@ import org.badr.orm.jpa.model.CompositeId.Association.Employee;
 public abstract class BaseClass{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "YesIamID")
+	@GeneratedValue(strategy = GenerationType.AUTO)	
 	private Long id;
 
 	public Long getId() {
 		return id;
 	}
-
-	private final String JustFinalField = "ttttttttFinal" ;
 
 }

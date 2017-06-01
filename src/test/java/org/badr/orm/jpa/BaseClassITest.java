@@ -6,6 +6,7 @@
 package org.badr.orm.jpa;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,8 +19,10 @@ public abstract class BaseClassITest {
 	protected Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	protected EntityManager entityManager;
+	protected EntityTransaction transaction;
 
 	public BaseClassITest() {
 		entityManager = Persistence.createEntityManagerFactory("JPA_Annotation").createEntityManager();
+		transaction = entityManager.getTransaction();
 	}
 }

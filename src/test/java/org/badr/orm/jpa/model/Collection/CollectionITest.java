@@ -23,8 +23,7 @@ import org.junit.Ignore;
  */
 public class CollectionITest extends BaseClassITest {
 
-	private Image image1;
-	private EntityTransaction transaction;
+	private Image image1;	
 
 	public CollectionITest() {
 	}
