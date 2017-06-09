@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.Parent;
 
 /**
  *
@@ -23,7 +24,7 @@ import lombok.ToString;
 @Embeddable
 @Access(AccessType.FIELD)
 @NoArgsConstructor @AllArgsConstructor
-@Getter @Setter @ToString
+@Getter @Setter @ToString(exclude = {"image"})
 public class Computer {
 	
 	@Column
@@ -31,5 +32,8 @@ public class Computer {
 	
 //	@Column(name = "ID_IMAGE", insertable = false, updatable = false)
 //	private Long idImage;
+	
+	@Parent 
+	private Image image;
 	
 }

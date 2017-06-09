@@ -109,6 +109,8 @@ public class CollectionITest extends BaseClassITest {
 		image2.setComputers(computers);
 		
 		transaction.begin();
+		entityManager.persist(room1);
+		entityManager.persist(room2);		
 		entityManager.persist(image2);
 		transaction.commit();
 		
@@ -119,6 +121,8 @@ public class CollectionITest extends BaseClassITest {
 		transaction.commit();
 		System.out.println("***************** imageDB.getComputerLocation() ==> " + Objects.toString(imageDB.getComputerLocation(), "000000000"));
 		System.out.println("***************** imageDB.getComputers() ==> " + Objects.toString(imageDB.getComputers(), "000000000"));
+		
+		assertTrue(imageDB.getComputerLocation().entrySet().stream().allMatch( cl -> cl.getValue().getImage().getId().equals(imageDB.getId())) );
 //		assertTrue( imageDB.getComputerLocation().entrySet().stream().allMatch(cl-> cl.getValue().getIdImage().equals(image2.getId())) && 
 //				   (imageDB.getComputerLocation().size()>0) );
 	}

@@ -48,12 +48,13 @@ public class Image {
 //	@Transient
 	private List<String> locations;
 	
-	@Transient
-//	@ElementCollection(fetch = FetchType.LAZY)
-//	@CollectionTable(name = "IMAGES_COMPUTER", joinColumns = @JoinColumn(name = "ID_IMAGE"))
-//	@MapKeyColumn(name = "COMPUTER_ORDER")
+//	@Transient
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "IMAGES_COMPUTER", joinColumns = @JoinColumn(name = "ID_IMAGE"))
+	@MapKeyColumn(name = "COMPUTER_ORDER")
 	private Map<Room ,Computer> computerLocation;
 	
+//	@Transient
 	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "COMPUTERS", joinColumns = @JoinColumn(name = "ID_IMAGE"))	
 	private List<Computer> computers;
