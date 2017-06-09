@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
  */
 public class CompositePKManyToOneITest extends BaseClassITest {
 	
-	@Test //@Ignore("You can activate to isolate you generated schema test")
+	@Test @Ignore("You can activate to isolate you generated schema test")
 	public void ShouldLoadContext() { }
 
 	/**
@@ -67,7 +67,7 @@ public class CompositePKManyToOneITest extends BaseClassITest {
 	 }
 
 
-	@Test @Ignore
+	@Test //@Ignore
 	public void ShouldPersistEntitiesForCompositeKeyWithAssociation_OK() {
 
 		Department department1 = new Department("IT", "Seatle");
@@ -152,7 +152,7 @@ public class CompositePKManyToOneITest extends BaseClassITest {
 		transaction.commit();
 	}
 
-	@Test //@Ignore
+	@Test @Ignore
 	public void shouldBlockDeletingDepartment(){
 
 		Department department1 = new Department();

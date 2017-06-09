@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class EmployeeId implements Serializable{
 
-	private String firstName;
+	private String firstName = null;
 	private Long department;
 
 	@Override
@@ -27,15 +27,15 @@ public class EmployeeId implements Serializable{
 		if (this == obj)  return false;
 		if (!(obj instanceof EmployeeId ))  return false;
 
-		if (department == null)  return false;
+		if (department == null || firstName == null)  return false;
 
 		EmployeeId otherEmployeeId = (EmployeeId) obj;
-		return department.equals(otherEmployeeId.getDepartment());
+		return department.equals(otherEmployeeId.getDepartment()) && firstName.equals(otherEmployeeId.firstName);
 	}
 
 	@Override
 	public int hashCode() {
-		return department == null ? super.hashCode():department.hashCode();
+		return (department == null ? super.hashCode():department.hashCode()) + ((firstName == null ? super.hashCode():firstName.hashCode()));
 	}
 
 

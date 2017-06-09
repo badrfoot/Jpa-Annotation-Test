@@ -10,6 +10,14 @@ import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,19 +29,25 @@ import org.hibernate.annotations.Parent;
  *
  * @author OBD
  */
-@Embeddable
+@Entity
+@Table(name = "IMAGES_COMPUTER")
 @Access(AccessType.FIELD)
+@IdClass(ComputerId.class)
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter @ToString(exclude = {"image"})
 public class Computer {
 	
-	@Column
-	private String ipAddress;
-	
-//	@Column(name = "ID_IMAGE", insertable = false, updatable = false)
-//	private Long idImage;
-	
-	@Parent 
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "ID_IMAGE", insertable = false, updatable = false)
 	private Image image;
+	
+	@Id
+	@ManyToOne
+	@JoinColumn(name = "COMPUTER_ROOM", insertable = false, updatable = false)
+	private Room room;
+	
+	@Column(insertable = false, updatable = false)
+	private String ipAddress;
 	
 }

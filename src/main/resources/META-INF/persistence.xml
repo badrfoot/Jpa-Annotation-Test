@@ -32,7 +32,7 @@
         <class>org.badr.orm.jpa.model.Collection.Image</class>
         <class>org.badr.orm.jpa.model.Collection.Computer</class>
         <class>org.badr.orm.jpa.model.Collection.Room</class>
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
