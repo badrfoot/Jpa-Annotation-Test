@@ -9,8 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Entity
-@Table(name = "TWO_WHEELER")
+//@Entity
+//@Table(name = "TWO_WHEELER")
 //@DiscriminatorValue("Bike")
 public class TwoWheeler extends Vehicle {
 

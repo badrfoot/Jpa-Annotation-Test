@@ -6,6 +6,7 @@
 package org.badr.orm.jpa.model.Collection;
 
 import java.util.List;
+import java.util.Map;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -14,7 +15,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
+import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,5 +45,19 @@ public class Image {
 
 	@ElementCollection(fetch = FetchType.LAZY)
 	@CollectionTable(name = "IMAGES_LOCATIONS")
-	private List<String> loations;
+//	@Transient
+	private List<String> locations;
+	
+	@Transient
+//	@ElementCollection(fetch = FetchType.LAZY)
+//	@CollectionTable(name = "IMAGES_COMPUTER", joinColumns = @JoinColumn(name = "ID_IMAGE"))
+//	@MapKeyColumn(name = "COMPUTER_ORDER")
+	private Map<Room ,Computer> computerLocation;
+	
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "COMPUTERS", joinColumns = @JoinColumn(name = "ID_IMAGE"))	
+	private List<Computer> computers;
+	
+	
+	
 }

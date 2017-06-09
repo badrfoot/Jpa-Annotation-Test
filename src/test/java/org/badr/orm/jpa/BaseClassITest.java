@@ -8,6 +8,8 @@ package org.badr.orm.jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import org.junit.Ignore;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,7 +17,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author OBD
  */
-public abstract class BaseClassITest {
+public class BaseClassITest {
 	protected Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	protected EntityManager entityManager;
@@ -24,5 +26,10 @@ public abstract class BaseClassITest {
 	public BaseClassITest() {
 		entityManager = Persistence.createEntityManagerFactory("JPA_Annotation").createEntityManager();
 		transaction = entityManager.getTransaction();
+	}
+	
+	@Test @Ignore
+	public void shouldLoadContext(){
+		
 	}
 }

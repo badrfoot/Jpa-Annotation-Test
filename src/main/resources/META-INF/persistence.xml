@@ -26,10 +26,12 @@
 
     <persistence-unit name="JPA_Annotation" transaction-type="RESOURCE_LOCAL">
         <!-- use this for Hibernate < 5.2 -->
-<!--        <provider>org.hibernate.ejb.HibernatePersistence</provider>-->
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <!-- use this for Hibernate > 5.2 -->
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-
+        <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>-->
+        <class>org.badr.orm.jpa.model.Collection.Image</class>
+        <class>org.badr.orm.jpa.model.Collection.Computer</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
