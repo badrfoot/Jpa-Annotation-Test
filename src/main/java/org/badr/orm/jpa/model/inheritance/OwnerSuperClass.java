@@ -5,16 +5,19 @@
  */
 package org.badr.orm.jpa.model.inheritance;
 
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+import lombok.NoArgsConstructor;
 
 /**
  *
  * @author OBD
  */
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class Engine extends Vehicle{
+@MappedSuperclass
+@NoArgsConstructor
+public class OwnerSuperClass extends Person{
+	
+	public OwnerSuperClass(String firstname, String lastname) {
+		super(firstname, lastname);
+	}	
 	
 }

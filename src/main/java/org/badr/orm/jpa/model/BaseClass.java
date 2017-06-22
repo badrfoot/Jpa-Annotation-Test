@@ -9,20 +9,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import lombok.Getter;
 
 /**
  *
  * @author OBD
  */
 @MappedSuperclass
+@Getter
 public abstract class BaseClass{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)	
+	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private Long id;
-
-	public Long getId() {
-		return id;
-	}
-
+	
 }

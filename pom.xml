@@ -11,6 +11,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--<hibernate.version>5.0.12.Final</hibernate.version>-->
         <hibernate.version>5.2.10.Final</hibernate.version>
+        <eclipseLink.version>2.6.4</eclipseLink.version>
     </properties>
 
     <dependencies>
@@ -29,6 +30,18 @@
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>eclipselink</artifactId>
+            <version>2.5.2</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.jpa</artifactId>
+            <version>${eclipseLink.version}</version>
         </dependency>
 
 

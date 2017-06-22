@@ -7,6 +7,7 @@ package org.badr.orm.jpa.model.Collection;
 
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -20,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapKeyColumn;
 import javax.persistence.MapKeyJoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import lombok.AllArgsConstructor;
@@ -27,6 +29,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.badr.orm.jpa.model.BaseClass;
 
 /**
  *
@@ -36,11 +39,7 @@ import lombok.ToString;
 @Table(name = "IMAGES")
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter @ToString
-public class Image {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+public class Image extends BaseClass{
 
 	@Column(name = "Name_Image")
 	private String name;
@@ -50,18 +49,23 @@ public class Image {
 	@Transient
 	private List<String> locations;
 	
-//	@Transient
+	@Transient
 //	@ElementCollection(fetch = FetchType.LAZY)
 //	@CollectionTable(name = "IMAGES_COMPUTER", joinColumns = @JoinColumn(name = "ID_IMAGE"))
 //	@MapKeyJoinColumn(name = "COMPUTER_ROOM")
-	@OneToMany(mappedBy = "image", cascade = CascadeType.ALL)		
-	@MapKeyJoinColumn(name = "COMPUTER_ROOM")
+//	@OneToMany(mappedBy = "image", cascade = CascadeType.ALL)		
+//	@MapKeyJoinColumn(name = "COMPUTER_ROOM", insertable = false, updatable = false)
 	private Map<Room ,Computer> computerLocation;
 	
-	@Transient
+//	@Transient
+	@ElementCollection(fetch = FetchType.LAZY)
+	@CollectionTable(name = "COMPUTERS", joinColumns = @JoinColumn(name = "ID_IMAGE"))
+	@OrderBy(("pcModel ASC"))
+	private SortedSet<Computer> computers;
 //	@ElementCollection(fetch = FetchType.LAZY)
-//	@CollectionTable(name = "COMPUTERS", joinColumns = @JoinColumn(name = "ID_IMAGE"))	
-	private List<Computer> computers;
+//	@CollectionTable(name = "COMPUTERS", joinColumns = @JoinColumn(name = "ID_IMAGE"))
+//	@OrderBy("ipAddress ASC")
+//	private List<Computer> computers;
 	
 	
 	

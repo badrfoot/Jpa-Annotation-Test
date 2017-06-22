@@ -23,31 +23,41 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.badr.orm.jpa.model.BaseClass;
 import org.hibernate.annotations.Parent;
 
 /**
  *
  * @author OBD
  */
-@Entity
-@Table(name = "IMAGES_COMPUTER")
+//@Entity
+//@Table(name = "IMAGES_COMPUTER")
+//@IdClass(ComputerId.class)
+@Embeddable
 @Access(AccessType.FIELD)
-@IdClass(ComputerId.class)
 @NoArgsConstructor @AllArgsConstructor
-@Getter @Setter @ToString(exclude = {"image"})
-public class Computer {
+@Getter @Setter @ToString //(exclude = {"image"})
+public class Computer implements Comparable<Computer>{
 	
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "ID_IMAGE", insertable = false, updatable = false)
-	private Image image;
+//	@Id
+//	@ManyToOne(optional = false)
+//	@JoinColumn(name = "ID_IMAGE")
+//	private Image image;
+//	
+//	@Id
+//	@ManyToOne(optional = false)
+//	@JoinColumn(name = "COMPUTER_ROOM")
+//	private Room room;
 	
-	@Id
-	@ManyToOne
-	@JoinColumn(name = "COMPUTER_ROOM", insertable = false, updatable = false)
-	private Room room;
-	
-	@Column(insertable = false, updatable = false)
+	@Column
 	private String ipAddress;
+	
+	@Column
+	private String pcModel;
+
+	@Override
+	public int compareTo(Computer o) {
+		return getIpAddress().compareTo(o.getIpAddress());
+	}
 	
 }

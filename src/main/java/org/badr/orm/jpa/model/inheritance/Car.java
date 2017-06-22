@@ -5,21 +5,31 @@
  */
 package org.badr.orm.jpa.model.inheritance;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
+import org.badr.orm.jpa.model.BaseClass;
 
 @Entity
 @ToString
-public class Car extends Engine {
+@Getter @Setter
+public class Car extends BaseClass {
 
 	private int noOfDoors;
 
-	public int getNoOfDoors() {
-		return noOfDoors;
-	}
-
-	public void setNoOfDoors(int noOfDoors) {
-		this.noOfDoors = noOfDoors;
-	}
+	@OneToMany(fetch = FetchType.LAZY,  targetEntity = MyEmployee.class)
+	@JoinColumn(name = "ID_CAREmployee")
+	private List<MyEmployeeSuperClass > driversMyEmployeeSuperClasses;
+	
+	@OneToMany(fetch = FetchType.LAZY, targetEntity = Owner.class)
+	@JoinColumn(name = "ID_CAR")
+	private List<OwnerSuperClass > driversOwnerSuperClasses;
+	
+	
 
 }

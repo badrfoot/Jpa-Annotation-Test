@@ -24,15 +24,40 @@
         </properties>
     </persistence-unit>
 
-    <persistence-unit name="JPA_Annotation" transaction-type="RESOURCE_LOCAL">
-        <!-- use this for Hibernate < 5.2 -->
-        <!--<provider>org.hibernate.ejb.HibernatePersistence</provider>-->
-        <!-- use this for Hibernate > 5.2 -->
+<!--    <persistence-unit name="JPA_Annotation" transaction-type="RESOURCE_LOCAL">
+         use this for Hibernate < 5.2 
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+         use this for Hibernate > 5.2 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>org.badr.orm.jpa.model.Collection.Image</class>
-        <class>org.badr.orm.jpa.model.Collection.Computer</class>
-        <class>org.badr.orm.jpa.model.Collection.Room</class>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>org.badr.orm.jpa.model.SecondaryTable.SimpleClassWithEmbeddable</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
+            <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="connection.pool_size" value="2"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+        </properties>
+    </persistence-unit>-->
+    
+    <persistence-unit name="JPA_Annotation" transaction-type="RESOURCE_LOCAL">
+<!--         use this for Hibernate < 5.2 
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+         use this for Hibernate > 5.2 -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>org.badr.orm.jpa.model.inheritance.MyEmployee</class>
+        <class>org.badr.orm.jpa.model.inheritance.Owner</class>
+        <class>org.badr.orm.jpa.model.inheritance.Person</class>
+        <class>org.badr.orm.jpa.model.inheritance.Car</class>
+        <class>org.badr.orm.jpa.model.inheritance.Engine</class>
+        <class>org.badr.orm.jpa.model.inheritance.Vehicle</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:standalone"/>
             <property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver"/>

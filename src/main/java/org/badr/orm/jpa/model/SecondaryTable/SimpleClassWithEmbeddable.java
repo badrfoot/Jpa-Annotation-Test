@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.badr.orm.jpa.model.BaseClass;
@@ -27,18 +29,23 @@ import org.badr.orm.jpa.model.BaseClass;
 
 @Entity
 @Table(name = "SimpleClassWithEmbeddable1")
-@SecondaryTable(name = "SimpleClassWithEmbeddable12", pkJoinColumns = @PrimaryKeyJoinColumn(name = "SimpleClassWithEmbeddable1_ID"))
-@Getter @Setter @NoArgsConstructor @ToString @AllArgsConstructor
+@SecondaryTable(name = "MySecondaryTable", pkJoinColumns = @PrimaryKeyJoinColumn(name = "MySecondaryTable_ID"))
+@Getter @Setter @NoArgsConstructor @ToString @AllArgsConstructor @RequiredArgsConstructor
 public class SimpleClassWithEmbeddable extends BaseClass{
 	
+	@NonNull
 	@Column
 	private String name;
 	
-	@Embedded
-	@AttributeOverrides({
-		@AttributeOverride(name = "start", column = @Column(table = "SimpleClassWithEmbeddable12")),
-		@AttributeOverride(name = "end", column = @Column(name = "END", table = "SimpleClassWithEmbeddable12"))
-	})
-	private EmbeddableDate embeddableDate;
+//	@Embedded
+//	@AttributeOverrides({
+//		@AttributeOverride(name = "start", column = @Column(table = "SimpleClassWithEmbeddable12")),
+//		@AttributeOverride(name = "end", column = @Column(name = "END", table = "SimpleClassWithEmbeddable12"))
+//	})
+//	private EmbeddableDate embeddableDate;	
+	
+	@Column(table = "MySecondaryTable")
+	private String lastName;
+	
 	
 }

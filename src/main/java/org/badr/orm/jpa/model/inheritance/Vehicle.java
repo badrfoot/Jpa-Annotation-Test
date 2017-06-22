@@ -15,16 +15,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.TableGenerator;
+import lombok.Getter;
+import org.badr.orm.jpa.model.BaseClass;
 
 //@Entity
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @MappedSuperclass
-public abstract class Vehicle { //extends Engine{
-
-	@TableGenerator(name = "VEHICLE_GEN", table = "ID_GEN", pkColumnName = "GEN_NAME", valueColumnName = "GEN_VAL", allocationSize = 1)
-	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "VEHICLE_GEN")
-	private int idVehicle;
+@Getter
+public abstract class Vehicle extends BaseClass{ //extends Engine{
 
 	@Column
 	private String manufacturer;
@@ -32,13 +30,5 @@ public abstract class Vehicle { //extends Engine{
 	@ElementCollection
 	@CollectionTable(name = "CountryManufacturers_For_Vehicule", joinColumns = @JoinColumn(name = "Id_Vehicle"))
 	private List<String> CountryManufacturers;
-
-	public String getManufacturer() {
-		return manufacturer;
-	}
-
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
-
+	
 }

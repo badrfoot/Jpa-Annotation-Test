@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -37,14 +38,29 @@ public class SimpleClassWithEmbeddableITest  extends BaseClassITest{
 	public void tearDown() {
 	}
 
-	@Test //@Ignore
+	@Test @Ignore
 	public void shouldInsertDoubleMapClass() {
 		
-		SimpleClassWithEmbeddable simpleClassEmbeddable = new SimpleClassWithEmbeddable("MyName", new EmbeddableDate("11/10/2011 - 11/10/2011"));
+//		SimpleClassWithEmbeddable simpleClassEmbeddable = new SimpleClassWithEmbeddable("MyName", new EmbeddableDate("11/10/2011 - 11/10/2011"));
+//		
+//		transaction.begin();
+//		entityManager.persist(simpleClassEmbeddable);
+//		transaction.commit();
+//		
+	}
+	
+	@Test //@Ignore
+	public void shouldGetMySecondaryTable() {
+		
+		SimpleClassWithEmbeddable simpleClassEmbeddable = new SimpleClassWithEmbeddable("MyName");
 		
 		transaction.begin();
 		entityManager.persist(simpleClassEmbeddable);
 		transaction.commit();
 		
+		entityManager.detach(simpleClassEmbeddable);		
+		
+		entityManager.find(SimpleClassWithEmbeddable.class,simpleClassEmbeddable.getId());	
+		entityManager.createQuery("SELECT e FROM " + SimpleClassWithEmbeddable.class.getSimpleName() + "  e").getResultList();//   SimpleClassWithEmbeddable.class,simpleClassEmbeddable.getId());	
 	}
 }
